@@ -1,20 +1,25 @@
-# Axciton Professional B2B Website (Static)
+# Axciton Static Website
 
-Hardware-first, professional redesign for polygraph systems with companion software support.
+## Project structure
+- HTML pages are at repo root (e.g. `index.html`, `products.html`, `downloads.html`).
+- Shared styles: `assets/css/styles.css`.
+- Shared behavior: `assets/js/main.js`.
+- Owner-provided files should be placed in `assets/img/` and `assets/files/`.
 
-## Stack
-- Semantic HTML5 pages
-- Single stylesheet: `assets/css/styles.css`
-- Minimal vanilla JS: `assets/js/main.js`
+## Editing content
+1. Replace `{{OWNER_COPY_HERE}}`, `TODO:OWNER_COPY_REQUIRED`, and `TODO:OWNER_FILE_REQUIRED` with finalized copy and asset paths.
+2. Replace `{IMAGE_PLACEHOLDER: ...}` blocks with real image markup or updated figures.
+3. Keep page metadata (`<title>`, description, OG tags) unique per page for SEO.
 
-## IA (primary)
-Home, Products, Software, Downloads, Support, Research, Contact
+## Deployment
+- This is a static site; deploy to any static host.
+- Ensure canonical URLs and OG image URL placeholders are updated before publishing.
 
-## Owner Handoff Markers
-- `{{OWNER_COPY_HERE}}`
-- `TODO: OWNER_COPY_REQUIRED`
-- `TODO: OWNER_ASSET_REQUIRED`
+## Local preview
+Run:
 
-## Asset Placeholders
-- Images use `assets/img/TODO-owner-image-*.jpg`
-- Files use `assets/files/TODO-owner-file-*.pdf`
+```bash
+python -m http.server 4173
+```
+
+Then open `http://localhost:4173`.

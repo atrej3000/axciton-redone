@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://TODO-OWNER-CANONICAL-URL/sitemap.xml
