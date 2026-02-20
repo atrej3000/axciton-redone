@@ -1,8 +1,10 @@
-# Image Asset Folder
+# /assets/img
 
-Place owner-provided, licensed image assets in this folder.
+Owner must place licensed images here.
 
-Required guidance:
-- Use filenames matching the placeholders referenced in HTML, e.g. `TODO-owner-image-*.jpg`.
-- Replace all placeholder references marked `TODO: OWNER_ASSET_REQUIRED`.
-- Provide optimized responsive source images appropriate for web delivery.
+Use filenames referenced in HTML, for example:
+- `TODO-owner-image-logo.jpg`
+- `TODO-owner-image-hero-home.jpg`
+- `TODO-owner-image-product-1.jpg`
+
+All such references are marked `TODO: OWNER_ASSET_REQUIRED`.

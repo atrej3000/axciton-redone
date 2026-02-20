@@ -1,8 +1,10 @@
-# Download Asset Folder
+# /assets/files
 
-Place owner-provided downloadable files in this folder.
+Owner must place downloadable files here.
 
-Required guidance:
-- Use filenames matching the placeholders referenced in HTML, e.g. `TODO-owner-file-*.pdf`.
-- Replace all placeholder references marked `TODO: OWNER_ASSET_REQUIRED`.
-- Update displayed file types/sizes in `downloads.html` to match real deliverables.
+Use filenames referenced in HTML, for example:
+- `TODO-owner-file-software-a.pdf`
+- `TODO-owner-file-driver.pdf`
+- `TODO-owner-file-manual.pdf`
+
+All such references are marked `TODO: OWNER_ASSET_REQUIRED`.

@@ -1,18 +1,20 @@
-# Axciton Static Marketing Site Rebuild
+# Axciton Professional B2B Website (Static)
 
-Modern, semantic HTML5 + CSS rebuild with minimal vanilla JS.
+Hardware-first, professional redesign for polygraph systems with companion software support.
 
 ## Stack
-- Plain HTML5 pages
-- Single CSS file: `assets/css/styles.css`
-- Single JS file: `assets/js/main.js`
+- Semantic HTML5 pages
+- Single stylesheet: `assets/css/styles.css`
+- Minimal vanilla JS: `assets/js/main.js`
 
-## Development
-Open `index.html` directly in a browser or serve with a static server.
+## IA (primary)
+Home, Products, Software, Downloads, Support, Research, Contact
 
-## Notes
-- All owner-required content/assets are marked:
-  - `{{OWNER_COPY_HERE}}`
-  - `TODO: OWNER_COPY_REQUIRED`
-  - `TODO: OWNER_ASSET_REQUIRED`
-- SEO placeholders are included for title, description, Open Graph, and canonical URLs.
+## Owner Handoff Markers
+- `{{OWNER_COPY_HERE}}`
+- `TODO: OWNER_COPY_REQUIRED`
+- `TODO: OWNER_ASSET_REQUIRED`
+
+## Asset Placeholders
+- Images use `assets/img/TODO-owner-image-*.jpg`
+- Files use `assets/files/TODO-owner-file-*.pdf`

@@ -20,7 +20,7 @@ document.querySelectorAll('[data-accordion] .accordion-trigger').forEach((btn) =
 const backToTop = document.querySelector('.back-to-top');
 if (backToTop) {
   window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('show', window.scrollY > 500);
+    backToTop.classList.toggle('show', window.scrollY > 480);
   });
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
@@ -29,24 +29,7 @@ const form = document.querySelector('[data-demo-form]');
 if (form) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const note = form.querySelector('[data-form-note]');
-    if (note) note.hidden = false;
-  });
-}
-
-const lightbox = document.querySelector('[data-lightbox]');
-if (lightbox) {
-  const image = lightbox.querySelector('img');
-  const closeBtn = lightbox.querySelector('.lightbox-close');
-  document.querySelectorAll('.gallery-item').forEach((button) => {
-    button.addEventListener('click', () => {
-      image.src = button.dataset.lightboxSrc || '';
-      lightbox.showModal();
-    });
-  });
-  closeBtn?.addEventListener('click', () => lightbox.close());
-  lightbox.addEventListener('click', (event) => {
-    if (event.target === lightbox) lightbox.close();
+    form.querySelector('[data-form-note]')?.removeAttribute('hidden');
   });
 }
 
