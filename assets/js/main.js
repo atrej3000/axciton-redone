@@ -1,3 +1,4 @@
+
 const menuToggle = document.querySelector('.menu-toggle');
 const siteNav = document.querySelector('#site-nav');
 const lightbox = document.getElementById('lightbox');
