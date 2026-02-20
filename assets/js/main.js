@@ -1,14 +1,16 @@
+
 const menuToggle = document.querySelector('.menu-toggle');
-const siteNav = document.querySelector('.site-nav');
+const siteNav = document.querySelector('#site-nav');
 if (menuToggle && siteNav) {
   menuToggle.addEventListener('click', () => {
-    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!expanded));
-    siteNav.classList.toggle('open');
+    const open = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!open));
+    menuToggle.classList.toggle('is-open', !open);
+    siteNav.classList.toggle('is-open', !open);
   });
 }
 
-document.querySelectorAll('[data-accordion] .accordion-trigger').forEach((btn) => {
+document.querySelectorAll('[data-accordion] button').forEach((btn) => {
   btn.addEventListener('click', () => {
     const expanded = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!expanded));
@@ -17,21 +19,24 @@ document.querySelectorAll('[data-accordion] .accordion-trigger').forEach((btn) =
   });
 });
 
-const backToTop = document.querySelector('.back-to-top');
-if (backToTop) {
-  window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('show', window.scrollY > 480);
+const lightbox = document.getElementById('lightbox');
+const lightboxText = document.getElementById('lightbox-text');
+const closeBtn = document.querySelector('.lightbox-close');
+document.querySelectorAll('.lightbox-trigger').forEach((trigger) => {
+  trigger.addEventListener('click', () => {
+    if (!lightbox || !lightboxText) return;
+    lightboxText.textContent = trigger.dataset.full || 'Preview';
+    lightbox.hidden = false;
   });
-  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+});
+if (closeBtn && lightbox) {
+  closeBtn.addEventListener('click', () => { lightbox.hidden = true; });
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.hidden = true; });
 }
 
-const form = document.querySelector('[data-demo-form]');
-if (form) {
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    form.querySelector('[data-form-note]')?.removeAttribute('hidden');
-  });
-}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox && !lightbox.hidden) lightbox.hidden = true;
+});
 
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
