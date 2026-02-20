@@ -148,5 +148,21 @@ document.querySelectorAll('[data-accordion] button').forEach((btn) => {
   });
 });
 
+
+const normalizePath = (path) => {
+  const cleanPath = (path || '').split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '');
+  if (!cleanPath || cleanPath === '') return 'index.html';
+  return cleanPath.split('/').pop() || 'index.html';
+};
+
+const currentPath = normalizePath(window.location.pathname);
+document.querySelectorAll('.site-nav a').forEach((link) => {
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+  if (normalizePath(href) === currentPath) {
+    link.setAttribute('aria-current', 'page');
+  }
+});
+
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
