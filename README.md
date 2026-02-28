@@ -1,25 +1,62 @@
-# Axciton Static Website
+# Axciton Systems — Website Redesign Proposal
 
-## Project structure
-- HTML pages are at repo root (e.g. `index.html`, `products.html`, `downloads.html`).
-- Shared styles: `assets/css/styles.css`.
-- Shared behavior: `assets/js/main.js`.
-- Owner-provided files should be placed in `assets/img/` and `assets/files/`.
+A modern rebuild of [axciton.com](https://www.axciton.com) — proposed as a barter exchange for a polygraph unit for scientific research.
 
-## Editing content
-1. Replace `{{OWNER_COPY_HERE}}`, `TODO:OWNER_COPY_REQUIRED`, and `TODO:OWNER_FILE_REQUIRED` with finalized copy and asset paths.
-2. Replace `{IMAGE_PLACEHOLDER: ...}` blocks with real image markup or updated figures.
-3. Keep page metadata (`<title>`, description, OG tags) unique per page for SEO.
+---
 
-## Deployment
-- This is a static site; deploy to any static host.
-- Ensure canonical URLs and OG image URL placeholders are updated before publishing.
+## 👁️ Live Preview
 
-## Local preview
-Run:
+> **[View Proposal →](https://yourusername.github.io/axciton/proposal.html)**
+> 
+> **[View Rebuilt Site →](https://yourusername.github.io/axciton/)**
 
-```bash
-python -m http.server 4173
+---
+
+## What This Is
+
+The current Axciton Systems website was built in 2006 — table-based layout, no mobile support, no SEO. This repository contains a complete ground-up rebuild: 6 pages, modern responsive design, full SEO implementation, and a proposal page addressed to Axciton's VP.
+
+The rebuilt site is offered in exchange for one Axciton polygraph unit to support independent scientific research.
+
+---
+
+## Structure
+
+```
+axciton/
+├── index.html          # Homepage
+├── proposal.html       # Business proposal for Axciton VP
+├── sitemap.xml         # SEO sitemap
+├── robots.txt          # Search engine crawling rules
+├── css/
+│   └── style.css       # All styles
+└── pages/
+    ├── products.html
+    ├── about.html
+    ├── research.html
+    ├── downloads.html
+    └── contact.html
 ```
 
-Then open `http://localhost:4173`.
+---
+
+## What Was Improved
+
+| | Old Site | This Rebuild |
+|---|---|---|
+| **Layout** | HTML tables (2006) | Modern CSS Grid & Flexbox |
+| **Mobile** | Broken | Fully responsive |
+| **SEO** | No meta tags | Full meta, OG, schema.org |
+| **Sitemap** | None | sitemap.xml + robots.txt |
+| **Design** | Outdated | Professional, modern |
+| **Contact** | Phone only | Contact form included |
+
+---
+
+## Tech Stack
+
+Pure HTML + CSS. No frameworks, no dependencies, no build step. Works by opening `index.html` in any browser.
+
+---
+
+*For questions about this proposal, contact: [your email]*

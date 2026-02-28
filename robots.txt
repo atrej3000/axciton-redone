@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://TODO-OWNER-CANONICAL-URL/sitemap.xml
+
+Sitemap: https://www.axciton.com/sitemap.xml

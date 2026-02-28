@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Proposal for Axciton Systems — Website Redesign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f8f5ef;
+      --paper-dark: #ede9e0;
+      --gold: #b8860b;
+      --gold-light: #d4a017;
+      --rust: #8b3a2a;
+      --muted: #6b6560;
+      --white: #ffffff;
+      --border: #d8d2c5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: scale(0.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .fade-up { animation: fadeUp 0.8s ease both; }
+    .fade-up-1 { animation-delay: 0.1s; }
+    .fade-up-2 { animation-delay: 0.25s; }
+    .fade-up-3 { animation-delay: 0.4s; }
+    .fade-up-4 { animation-delay: 0.55s; }
+    .fade-up-5 { animation-delay: 0.7s; }
+
+    /* ── COVER ── */
+    .cover {
+      min-height: 100vh;
+      background: var(--ink);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(184,134,11,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139,58,42,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cover-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cover-label::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold-light);
+    }
+
+    .cover h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 2rem;
+      letter-spacing: -1px;
+    }
+
+    .cover h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .cover-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    .cover-from {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.3);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue span {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: pulse 2s infinite;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 2rem; }
+
+    .section-inner { max-width: 860px; margin: 0 auto; }
+
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    p { color: var(--muted); margin-bottom: 1.25rem; }
+    p strong { color: var(--ink); font-weight: 500; }
+
+    /* ── PROBLEM SECTION ── */
+    .problem { background: var(--paper); }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin: 3rem 0;
+      border: 1px solid var(--border);
+    }
+
+    .compare-col {
+      padding: 2.5rem;
+    }
+
+    .compare-col.old {
+      background: #f0ece3;
+      border-right: 2px solid var(--border);
+    }
+
+    .compare-col.new {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .compare-col h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .compare-col.old h3 { color: var(--rust); }
+    .compare-col.new h3 { color: var(--gold-light); }
+
+    .compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .compare-item .icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
+    .compare-col.old .icon { background: rgba(139,58,42,0.15); color: var(--rust); }
+    .compare-col.new .icon { background: rgba(184,134,11,0.25); color: var(--gold-light); }
+    .compare-col.old .compare-item { color: var(--muted); }
+    .compare-col.new .compare-item { color: rgba(255,255,255,0.75); }
+
+    /* ── VALUE ── */
+    .value { background: var(--paper-dark); }
+
+    .value-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5px;
+      margin: 3rem 0;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .value-card {
+      background: var(--paper);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+    .value-card:hover { background: var(--white); }
+
+    .value-card .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-card h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    .value-card p {
+      font-size: 0.82rem;
+      margin: 0;
+    }
+
+    /* ── THE DEAL ── */
+    .deal { background: var(--ink); color: var(--white); }
+
+    .deal h2 { color: var(--white); }
+    .deal p { color: rgba(255,255,255,0.6); }
+
+    .deal-box {
+      border: 1px solid rgba(184,134,11,0.4);
+      padding: 3rem;
+      margin: 3rem 0;
+      position: relative;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .deal-box::before {
+      content: 'THE EXCHANGE';
+      position: absolute;
+      top: -0.75rem;
+      left: 2rem;
+      background: var(--ink);
+      padding: 0 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+    }
+
+    .exchange-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .exchange-side { text-align: center; }
+
+    .exchange-side .big {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .exchange-side .small {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .exchange-arrow {
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 300;
+    }
+
+    .price-tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      padding: 0.5rem 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── WHY US ── */
+    .why { background: var(--paper); }
+
+    .why-list { margin: 2.5rem 0; }
+
+    .why-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      animation: slideIn 0.6s ease both;
+    }
+
+    .why-item:first-child { border-top: 1px solid var(--border); }
+
+    .why-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      padding-top: 4px;
+    }
+
+    .why-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .why-item p { font-size: 0.9rem; margin: 0; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--paper-dark);
+      text-align: center;
+      padding: 7rem 2rem;
+    }
+
+    .cta-section h2 { margin-bottom: 1rem; }
+    .cta-section p { max-width: 480px; margin: 0 auto 2.5rem; }
+
+    .cta-block {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 1.1rem 2.8rem;
+      transition: all 0.25s;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--ink);
+    }
+
+    .btn-hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.3);
+      padding: 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+    }
+
+    footer a { color: var(--gold-light); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 650px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .compare-col.old { border-right: none; border-bottom: 2px solid var(--border); }
+      .exchange-row { grid-template-columns: 1fr; }
+      .exchange-arrow { transform: rotate(90deg); }
+      .cover-from { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── COVER ── -->
+  <section class="cover">
+    <div class="cover-inner">
+      <div class="cover-label fade-up fade-up-1">Confidential Business Proposal</div>
+      <h1 class="fade-up fade-up-2">
+        Your Website<br>Deserves to Be<br><em>As Good As Your Product.</em>
+      </h1>
+      <p class="cover-sub fade-up fade-up-3">
+        A proposal to modernize Axciton Systems' digital presence — in exchange for a polygraph unit to support independent scientific research.
+      </p>
+      <div class="cover-from fade-up fade-up-4">
+        <span>Presented to: Axciton Systems, Inc. VP</span>
+        <span>From: Scientific Research Center</span>
+        <span>February 2026</span>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span></span>
+      scroll
+    </div>
+  </section>
+
+  <!-- ── PROBLEM ── -->
+  <section class="problem">
+    <div class="section-inner">
+      <div class="section-tag fade-up">The Situation</div>
+      <h2 class="fade-up">Axciton's Technology Is World-Class. The Website Is Not.</h2>
+      <p>Axciton Systems was the <strong>first company in the world to produce a usable computerized polygraph system</strong>. That's a remarkable achievement — 25+ years of innovation, trusted by law enforcement and government agencies globally.</p>
+      <p>But the current website was built in 2006. Potential customers searching online form their first impression there. Right now, that impression doesn't reflect the quality of the product behind it.</p>
+
+      <div class="compare-grid">
+        <div class="compare-col old">
+          <h3>⚠ Current Website (2006)</h3>
+          <div class="compare-item"><div class="icon">✕</div>Table-based layout from 2006 — breaks on all mobile devices</div>
+          <div class="compare-item"><div class="icon">✕</div>No SEO metadata — essentially invisible to Google</div>
+          <div class="compare-item"><div class="icon">✕</div>No HTTPS security warning risk on modern browsers</div>
+          <div class="compare-item"><div class="icon">✕</div>No contact form — just a phone number</div>
+          <div class="compare-item"><div class="icon">✕</div>Visual design signals an abandoned or untrustworthy company</div>
+          <div class="compare-item"><div class="icon">✕</div>No downloads page with proper access control</div>
+        </div>
+        <div class="compare-col new">
+          <h3>✦ Proposed Redesign (2026)</h3>
+          <div class="compare-item"><div class="icon">✓</div>Fully mobile-responsive — works on every device</div>
+          <div class="compare-item"><div class="icon">✓</div>SEO-optimized structure — Google-indexed, searchable</div>
+          <div class="compare-item"><div class="icon">✓</div>Modern, professional design that reflects 25 years of leadership</div>
+          <div class="compare-item"><div class="icon">✓</div>Contact form + email notification signup</div>
+          <div class="compare-item"><div class="icon">✓</div>Clean navigation across all pages</div>
+          <div class="compare-item"><div class="icon">✓</div>Ready to deploy — all files delivered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VALUE ── -->
+  <section class="value">
+    <div class="section-inner">
+      <div class="section-tag">What You're Receiving</div>
+      <h2>A $10,000 Website. At Zero Cash Cost.</h2>
+      <p>A professional agency would charge between $8,000 and $14,000 for this scope of work. Here's exactly what is being delivered:</p>
+
+      <div class="value-cards">
+        <div class="value-card">
+          <div class="num">6</div>
+          <h4>Complete Pages</h4>
+          <p>Home, Products, About, Research, Downloads, and Contact — all fully built and linked.</p>
+        </div>
+        <div class="value-card">
+          <div class="num">100%</div>
+          <h4>Mobile Responsive</h4>
+          <p>Tested across all screen sizes. Works perfectly on phones, tablets, and desktops.</p>
+        </div>
+        <div class="value-card">
+          <div class="num">SEO</div>
+          <h4>Search Optimized</h4>
+          <p>Proper semantic HTML, meta tags, heading hierarchy — built to be found on Google.</p>
+        </div>
+        <div class="value-card">
+          <div class="num">∞</div>
+          <h4>No Dependencies</h4>
+          <p>Pure HTML + CSS. No WordPress, no subscriptions, no platform lock-in. You own it.</p>
+        </div>
+        <div class="value-card">
+          <div class="num">25+</div>
+          <h4>Years Honored</h4>
+          <p>All original content, history, and brand messaging preserved and prominently featured.</p>
+        </div>
+        <div class="value-card">
+          <div class="num">$0</div>
+          <h4>Cash Required</h4>
+          <p>No invoice. No wire transfer. A clean, direct barter between two organizations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE DEAL ── -->
+  <section class="deal">
+    <div class="section-inner">
+      <div class="section-tag" style="color:var(--gold-light);">The Proposal</div>
+      <h2>A Simple, Fair Exchange</h2>
+      <p>No contracts, no lawyers, no complexity. Two organizations, each offering something the other needs.</p>
+
+      <div class="deal-box">
+        <div class="exchange-row">
+          <div class="exchange-side">
+            <div class="price-tag">$10,000</div>
+            <div class="big">Professional Website Redesign</div>
+            <div class="small">Delivered by Scientific Research Center</div>
+          </div>
+          <div class="exchange-arrow">⇄</div>
+          <div class="exchange-side">
+            <div class="price-tag" style="background: rgba(184,134,11,0.2); color: var(--gold-light);">1 Unit</div>
+            <div class="big">Axciton Polygraph System</div>
+            <div class="small">For independent scientific research</div>
+          </div>
+        </div>
+      </div>
+
+      <p>The polygraph unit will be used exclusively for <strong style="color:rgba(255,255,255,0.85);">legitimate, independent scientific research</strong> at our center. In turn, Axciton receives a fully modernized website that accurately represents its standing as the pioneer of computerized polygraph technology — one that will serve the company for the next decade.</p>
+      <p>We are not a competitor. We are researchers. This is a partnership that benefits both parties.</p>
+    </div>
+  </section>
+
+  <!-- ── WHY ── -->
+  <section class="why">
+    <div class="section-inner">
+      <div class="section-tag">Why This Makes Sense</div>
+      <h2>Four Reasons to Say Yes</h2>
+
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-num">1</div>
+          <div>
+            <h4>Your competitors are online. You're not visible.</h4>
+            <p>When procurement officers at law enforcement agencies search for polygraph systems today, Axciton's outdated site may actually disqualify you before a conversation starts. A modern website is a sales tool — and right now, it's working against you.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">2</div>
+          <div>
+            <h4>The work is already done.</h4>
+            <p>This is not a speculative proposal. The website has been built. All 6 pages, all content, all code — ready to hand over. You can review it today and deploy it this week.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">3</div>
+          <div>
+            <h4>Your legacy deserves better representation.</h4>
+            <p>Axciton was first. 25 years of pioneering work in polygraph science is an extraordinary achievement. The website that represents that legacy should match the caliber of the achievement — not undercut it.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">4</div>
+          <div>
+            <h4>Scientific research benefits the whole profession.</h4>
+            <p>Independent polygraph research directly strengthens the scientific credibility of the entire field — which ultimately supports every company operating within it, including Axciton. Contributing a unit to legitimate research is both a generous and strategically sound decision.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="section-tag" style="justify-content:center; margin-bottom:1.5rem;">Next Steps</div>
+      <h2>We'd Welcome a Conversation.</h2>
+      <p>The website is ready to preview. If you'd like to see it live, discuss the terms, or ask any questions — we're ready to talk.</p>
+      <div class="cta-block">
+        <a href="index.html" class="btn-primary">Preview the New Website →</a>
+        <span class="btn-hint">index.html — opens the full rebuilt site</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Presented by Scientific Research Center &nbsp;·&nbsp; Proposal for Axciton Systems, Inc. &nbsp;·&nbsp; February 2026</p>
+    <p style="margin-top:0.5rem;">This document is confidential and intended solely for the addressee.</p>
+  </footer>
+
+</body>
+</html>
