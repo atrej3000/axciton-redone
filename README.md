@@ -6,9 +6,9 @@ A modern rebuild of [axciton.com](https://www.axciton.com) — proposed as a bar
 
 ## 👁️ Live Preview
 
-> **[View Proposal →](https://yourusername.github.io/axciton/proposal.html)**
+> **[View Proposal →](https://atrej3000.github.io/axciton-redone/proposal.html)**
 > 
-> **[View Rebuilt Site →](https://yourusername.github.io/axciton/)**
+> **[View Rebuilt Site →](https://atrej3000.github.io/axciton-redone/)**
 
 ---
 
@@ -59,4 +59,4 @@ Pure HTML + CSS. No frameworks, no dependencies, no build step. Works by opening
 
 ---
 
-*For questions about this proposal, contact: [your email]*
+*For questions about this proposal, contact: [andrii.serha@gmail.com]*
